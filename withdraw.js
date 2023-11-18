@@ -11,29 +11,40 @@
 7. clear the withdraw field
 */
 // step 1 :
-document.getElementById('btn-withdraw').addEventListener('click', function(){
-    // step 2 :
-    const withdrawField = document.getElementById('withdraw-field');
-    const newWithdrawAmountString = withdrawField.value;
-    const newWithdrawAmount = parseFloat(newWithdrawAmountString);
+document.getElementById("btn-withdraw").addEventListener("click", function () {
+  // step 2 :
+  const withdrawField = document.getElementById("withdraw-field");
+  const newWithdrawAmountString = withdrawField.value;
+  const newWithdrawAmount = parseFloat(newWithdrawAmountString);
 
-    // step 3 :
-    const withdrawTotalElement = document.getElementById('withdraw-total');
-    const prevWithdrawTotalString = withdrawTotalElement.innerText;
-    const prevWithdrawTotal = parseFloat(prevWithdrawTotalString);
+  // step 7:
+  withdrawField.value = "";
 
-    // step 4 :
-    const currentWithdrawTotal = prevWithdrawTotal + newWithdrawAmount;
-    withdrawTotalElement.innerText = currentWithdrawTotal;
+  if (isNaN(newWithdrawAmount)) {
+    alert("provide a valid number");
+    return;
+  }
 
-    // step 5 :
-    const balanceTotalElement = document.getElementById('balance-total');
-    const prevBalanceTotalString = balanceTotalElement.innerText;
-    const prevBalanceTotal = parseFloat(prevBalanceTotalString);
-    // step 6 :
-    const newBalanceTotal = prevBalanceTotal - newWithdrawAmount;
-    balanceTotalElement.innerText = newBalanceTotal;
+  // step 3 :
+  const withdrawTotalElement = document.getElementById("withdraw-total");
+  const prevWithdrawTotalString = withdrawTotalElement.innerText;
+  const prevWithdrawTotal = parseFloat(prevWithdrawTotalString);
 
-    // step 7:
-    withdrawField.value = '';
-})
+  // step 5 :
+  const balanceTotalElement = document.getElementById("balance-total");
+  const prevBalanceTotalString = balanceTotalElement.innerText;
+  const prevBalanceTotal = parseFloat(prevBalanceTotalString);
+
+  if (newWithdrawAmount > prevBalanceTotal) {
+    alert("less money");
+    return;
+  }
+
+  // step 4 :
+  const currentWithdrawTotal = prevWithdrawTotal + newWithdrawAmount;
+  withdrawTotalElement.innerText = currentWithdrawTotal;
+
+  // step 6 :
+  const newBalanceTotal = prevBalanceTotal - newWithdrawAmount;
+  balanceTotalElement.innerText = newBalanceTotal;
+});
